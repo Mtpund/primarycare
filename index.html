@@ -172,19 +172,14 @@
   currentStep = step;
   stepProgress();
 
-  // Scroll to the label of the active step instead of a container
-  const activeStep = steps[step];
-  const targetLabel = activeStep.querySelector('label');
-
-  if (targetLabel) {
-    targetLabel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  } else {
-    // fallback to form wrapper
-    const wrapper = document.querySelector('.form-wrapper');
-    if (wrapper) {
-      wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Scroll the entire form wrapper to the top of the viewport
+  const wrapper = document.querySelector('.form-wrapper');
+  if (wrapper) {
+    const yOffset = -20; // Optional tweak to offset slightly from very top
+    const y = wrapper.getBoundingClientRect().top + window.pageYOffset + yOffset;
+    window.scrollTo({ top: y, behavior: 'smooth' });
   }
+
 };
 
 
